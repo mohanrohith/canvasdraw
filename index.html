@@ -30,6 +30,9 @@
           dapp.setStyle("lineWidth", (dapp.getStyle("lineWidth")+1));
           updateSize(dapp.getStyle("lineWidth"));
         }
+        document.getElementById("save").onclick = function(){
+          window.open(dapp.saveAsImage());
+        } 
          
          
       }
@@ -77,6 +80,7 @@
     <button class="button brown"  name="color" value="#986928">Brown</button>
     <button id="size_minus">-</button><span id ="size"></span>
     <button id="size_plus">+</button>
+    <button name="save" id="save" >Save</button>
 
   </body>
 </html>

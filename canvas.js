@@ -133,3 +133,7 @@ DAP.redraw = function(){
     Draw.canvas.context.stroke();
   }
 }
+
+DAP.saveAsImage = function(){
+  return Draw.canvas.canvas.toDataURL();
+}
