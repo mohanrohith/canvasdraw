@@ -148,10 +148,12 @@ DAP.undo = function(){
   var index = Draw.state.undo.length,
   num = Draw.state.undo[index-1] - Draw.state.undo[index-2];
   
-  for(var arr in Draw.state.draw){
-    Draw.state.draw[arr].splice(Draw.state.undo[index-2],num);
-  }
+  if(Draw.state.draw.clickX.length >0){
+    for(var arr in Draw.state.draw){
+      Draw.state.draw[arr].splice(Draw.state.undo[index-2],num);
+    }
   
-  Draw.state.undo.pop();
-  this.redraw();
+    Draw.state.undo.pop();
+    this.redraw();
+  }
 }
