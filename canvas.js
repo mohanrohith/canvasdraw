@@ -16,8 +16,9 @@ var Draw = Draw || {
       clickY: [],
       clickDrag: [],
       clickColor:[],
-      clickSize:[]
-    }
+      clickSize:[]      
+    },
+    undo:[0]
   }, 
   canvas:{},
   App: function(){}
@@ -81,12 +82,17 @@ DAP.bindEvents = function(){
     }
   }
   
-  canvas.onmouseout = function(e){
-    Draw.state.paint = false;
-  }
-  
   canvas.onmouseup = function(e){
     Draw.state.paint = false;
+    Draw.state.undo.push(Draw.state.draw.clickX.length);
+  }
+  
+  canvas.onmouseout = function(e){
+    if(Draw.state.paint){
+      Draw.state.undo.push(Draw.state.draw.clickX.length);
+    }
+    Draw.state.paint = false;
+    
   }
 }
 
@@ -136,4 +142,16 @@ DAP.redraw = function(){
 
 DAP.saveAsImage = function(){
   return Draw.canvas.canvas.toDataURL();
+}
+
+DAP.undo = function(){
+  var index = Draw.state.undo.length,
+  num = Draw.state.undo[index-1] - Draw.state.undo[index-2];
+  
+  for(var arr in Draw.state.draw){
+    Draw.state.draw[arr].splice(Draw.state.undo[index-2],num);
+  }
+  
+  Draw.state.undo.pop();
+  this.redraw();
 }

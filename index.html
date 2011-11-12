@@ -33,6 +33,9 @@
         document.getElementById("save").onclick = function(){
           window.open(dapp.saveAsImage());
         } 
+        document.getElementById("undo").onclick = function(){
+          dapp.undo();
+        } 
          
          
       }
@@ -73,6 +76,7 @@
   </head>
   <body onload="load_app()">
     <div id="canvas_wrapper"> </div>
+    <button name="undo" id="undo" value="value">Undo</button>
     <button name="clear" id="clear" value="value">Clear</button>
     <button class="button purple"  name="color" value="#cb3594">Purple</button>
     <button class="button green"  name="color" value="#659b41">Green</button>
